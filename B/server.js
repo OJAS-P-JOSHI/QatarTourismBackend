@@ -4,7 +4,10 @@ const dotenv = require('dotenv');
 const tourRoutes = require('./routes/tourRoutes');
 const bookingRoutes = require('./routes/bookingRoutes');
 const reviewRoutes = require('./routes/reviewRoutes');
-const authRoutes = require('./routes/authRoutes');
+const articleRoutes = require('./routes/articleRoutes');
+const blogRoutes = require('./routes/blogRoutes');
+const specialOfferRoutes = require('./routes/specialOfferRoutes');
+const authRoutes = require('./routes/authRoutes'); 
 
 dotenv.config();
 
@@ -12,10 +15,12 @@ const app = express();
 
 app.use(express.json());
 
-app.use('/api/auth', authRoutes);
 app.use('/api/tours', tourRoutes);
 app.use('/api/bookings', bookingRoutes);
 app.use('/api/reviews', reviewRoutes);
+app.use('/api/articles', articleRoutes);
+app.use('/api/blogs', blogRoutes);
+app.use('/api/special-offers', specialOfferRoutes);
 
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('MongoDB connected'))
