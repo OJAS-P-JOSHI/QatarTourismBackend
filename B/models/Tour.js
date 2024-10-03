@@ -13,7 +13,7 @@ const tourSchema = new mongoose.Schema({
     required: true
   },
   price: { type: Number, required: true },
-  duration: { type: Number, required: true }, // Duration in hours or days
+  duration: { type: Number, required: true },
   location: { type: String, required: true },
   availableFrom: { type: Date, required: true },
   availableTo: { type: Date, required: true },

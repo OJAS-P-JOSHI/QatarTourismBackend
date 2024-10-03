@@ -1,11 +1,12 @@
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
 
+// Helper to create JWT token
 const createToken = (user) => {
-  return jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
+  return jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1d' });
 };
 
+// Register new user
 exports.register = async (req, res) => {
   const { username, firstName, lastName, email, password } = req.body;
 
@@ -23,6 +24,7 @@ exports.register = async (req, res) => {
   }
 };
 
+// Login existing user
 exports.login = async (req, res) => {
   const { email, password } = req.body;
 
@@ -42,8 +44,4 @@ exports.login = async (req, res) => {
   } catch (err) {
     res.status(500).json({ message: 'Server error' });
   }
-};
-
-exports.forgotPassword = (req, res) => {
-  res.status(200).json({ message: 'Forgot password endpoint' });
 };
