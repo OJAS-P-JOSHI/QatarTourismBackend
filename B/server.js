@@ -16,7 +16,13 @@ const app = express();
 
 // Middleware
 app.use(express.json());
-app.use(cors()); // Enable CORS for all origins
+
+// CORS: Allow requests only from the frontend URL
+app.use(cors({
+  origin: 'https://dubai-beta1.vercel.app',
+  methods: 'GET,POST,PUT,DELETE',
+  credentials: true, // Allow cookies if needed
+}));
 
 // Routes
 app.use('/api/auth', authRoutes);
