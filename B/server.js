@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const cors = require('cors'); // Import CORS
 const tourRoutes = require('./routes/tourRoutes');
 const bookingRoutes = require('./routes/bookingRoutes');
 const reviewRoutes = require('./routes/reviewRoutes');
@@ -15,10 +16,9 @@ const app = express();
 
 // Middleware
 app.use(express.json());
-app.use(cors({ origin: '*' })); // Enable CORS for all origins
+app.use(cors()); // Enable CORS for all origins
 
-app.use(express.json());
-
+// Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/tours', tourRoutes);
 app.use('/api/bookings', bookingRoutes);
@@ -27,13 +27,12 @@ app.use('/api/articles', articleRoutes);
 app.use('/api/blogs', blogRoutes);
 app.use('/api/special-offers', specialOfferRoutes);
 
-// app.use('/api/dashboard', dashboardRoutes);
-// app.use('/api/messages', messageRoutes);
-
+// MongoDB connection
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('MongoDB connected'))
   .catch((err) => console.log(err));
 
+// Start the server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
