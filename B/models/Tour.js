@@ -3,20 +3,12 @@ const mongoose = require('mongoose');
 const tourSchema = new mongoose.Schema({
   name: { type: String, required: true },
   description: { type: String, required: true },
-  category: {
-    type: String,
+  category: { 
+    type: String, 
     enum: [
-      "Private tours",
-      "Group tours",
-      "City tours",
-      "Desert safari",
-      "Multi-day packages",
-      "Museum tours",
-      "Tickets",
-      "Attractions",
-      "Parks",
-      "Hotels",
-      "Services"
+      "Private tours", "Group tours", "City tours", "Desert safari",
+      "Multi-day packages", "Museum tours", "Tickets", "Attractions",
+      "Parks", "Hotels", "Services"
     ],
     required: true
   },

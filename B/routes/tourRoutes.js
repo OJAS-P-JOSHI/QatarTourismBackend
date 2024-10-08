@@ -5,12 +5,12 @@ const { protect, adminOnly } = require('../middlewares/authMiddleware');
 const router = express.Router();
 
 router.route('/')
-  .post(protect, adminOnly, createTour)  // Admin only
+  .post(protect, adminOnly, createTour)
   .get(getTours);
 
 router.route('/:id')
   .get(getTour)
-  .put(protect, adminOnly, updateTour)  // Admin only
-  .delete(protect, adminOnly, deleteTour);  // Admin only
+  .put(protect, adminOnly, updateTour)
+  .delete(protect, adminOnly, deleteTour);
 
 module.exports = router;

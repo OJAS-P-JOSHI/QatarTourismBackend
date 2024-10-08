@@ -13,14 +13,22 @@ dotenv.config();
 
 const app = express();
 
+// Middleware
+app.use(express.json());
+app.use(cors({ origin: '*' })); // Enable CORS for all origins
+
 app.use(express.json());
 
+app.use('/api/auth', authRoutes);
 app.use('/api/tours', tourRoutes);
 app.use('/api/bookings', bookingRoutes);
 app.use('/api/reviews', reviewRoutes);
 app.use('/api/articles', articleRoutes);
 app.use('/api/blogs', blogRoutes);
 app.use('/api/special-offers', specialOfferRoutes);
+
+// app.use('/api/dashboard', dashboardRoutes);
+// app.use('/api/messages', messageRoutes);
 
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('MongoDB connected'))
