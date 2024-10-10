@@ -32,7 +32,7 @@ app.use('/api/reviews', reviewRoutes);
 app.use('/api/articles', articleRoutes);
 app.use('/api/blogs', blogRoutes);
 app.use('/api/special-offers', specialOfferRoutes);
-app.use('/api/auth', authRoutes);
+app.use('/api/payments', paymentRoutes);
 
 // MongoDB connection
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
