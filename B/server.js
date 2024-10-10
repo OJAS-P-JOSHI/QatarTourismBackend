@@ -9,6 +9,7 @@ const articleRoutes = require('./routes/articleRoutes');
 const blogRoutes = require('./routes/blogRoutes');
 const specialOfferRoutes = require('./routes/specialOfferRoutes');
 const authRoutes = require('./routes/authRoutes'); 
+const paymentRoutes = require('./routes/paymentRoutes'); 
 
 dotenv.config();
 
@@ -33,7 +34,6 @@ app.use('/api/articles', articleRoutes);
 app.use('/api/blogs', blogRoutes);
 app.use('/api/special-offers', specialOfferRoutes);
 app.use('/api/payments', paymentRoutes);
-
 // MongoDB connection
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('MongoDB connected'))

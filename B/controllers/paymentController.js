@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 exports.createPaymentIntent = async (req, res) => {
@@ -6,7 +8,7 @@ exports.createPaymentIntent = async (req, res) => {
   try {
     // Create a payment intent with the specified amount and currency
     const paymentIntent = await stripe.paymentIntents.create({
-      amount, // Amount in the smallest currency unit (e.g., cents for USD)
+      amount, // Amount in cents
       currency,
     });
 
