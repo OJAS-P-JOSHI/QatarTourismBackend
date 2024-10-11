@@ -20,7 +20,7 @@ app.use(express.json());
 
 // CORS: Allow requests only from the frontend URL
 app.use(cors({
-  origin: '*',
+  origin: ['*','https://dubai-beta1.vercel.app/'],
   methods: 'GET,POST,PUT,DELETE',
   credentials: true, // Allow cookies if needed
 }));
