@@ -1,7 +1,7 @@
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 
-// Create JWT token
+// Function to create JWT token
 const createToken = (user) => {
   return jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
 };
@@ -18,6 +18,9 @@ exports.register = async (req, res) => {
 
     const user = await User.create({ username, firstName, lastName, email, password });
     const token = createToken(user);
+
+    // Store the token in a cookie
+    res.cookie('token', token, { httpOnly: true });
     res.status(201).json({ user, token });
   } catch (err) {
     res.status(500).json({ message: 'Server error' });
@@ -40,8 +43,27 @@ exports.login = async (req, res) => {
     }
 
     const token = createToken(user);
+
+    // Store the token in a cookie
+    res.cookie('token', token, { httpOnly: true });
     res.status(200).json({ user, token });
   } catch (err) {
     res.status(500).json({ message: 'Server error' });
+  }
+};
+
+// Validate token route
+exports.validateToken = async (req, res) => {
+  const token = req.cookies.token;  // Get token from cookie
+
+  if (!token) {
+    return res.status(401).json({ message: 'No token found' });
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    res.status(200).json({ message: 'Token is valid', userId: decoded.id });
+  } catch (err) {
+    res.status(401).json({ message: 'Invalid token' });
   }
 };
