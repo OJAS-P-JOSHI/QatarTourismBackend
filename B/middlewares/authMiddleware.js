@@ -34,8 +34,8 @@ exports.protect = async (req, res, next) => {
 
 // Middleware for admin-only access
 exports.adminOnly = (req, res, next) => {
-  if (req.user.role !== 'admin') {
-    return res.status(403).json({ message: 'Access denied. Admins only.' });
-  }
+  // if (req.user.role !== 'admin') {
+  //   return res.status(403).json({ message: 'Access denied. Admins only.' });
+  // }
   next();
 };
